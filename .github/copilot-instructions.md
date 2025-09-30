@@ -438,20 +438,19 @@ export default () => (
 - Tailwind v4 removed deprecated utilities. Do not use the deprecated option - use the replacement.
 - Opacity values are still numeric.
 
-| Deprecated |	Replacement |
+| Deprecated | Replacement |
 |------------+--------------|
-| bg-opacity-* | bg-black/* |
-| text-opacity-* | text-black/* |
-| border-opacity-* | border-black/* |
-| divide-opacity-* | divide-black/* |
-| ring-opacity-* | ring-black/* |
-| placeholder-opacity-* | placeholder-black/* |
-| flex-shrink-* | shrink-* |
-| flex-grow-* | grow-* |
-| overflow-ellipsis | text-ellipsis |
-| decoration-slice | box-decoration-slice |
-| decoration-clone | box-decoration-clone |
-
+| bg-opacity-\*      | bg-black/\*      |
+| text-opacity-\*    | text-black/\*    |
+| border-opacity-\*  | border-black/\*  |
+| divide-opacity-\*  | divide-black/\*  |
+| ring-opacity-\*    | ring-black/\*    |
+| placeholder-opacity-\* | placeholder-black/\* |
+| flex-shrink-\*     | shrink-\*        |
+| flex-grow-\*       | grow-\*          |
+| overflow-ellipsis  | text-ellipsis    |
+| decoration-slice   | box-decoration-slice   |
+| decoration-clone   | box-decoration-clone   |
 
 === tests rules ===
 
