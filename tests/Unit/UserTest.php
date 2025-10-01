@@ -17,6 +17,14 @@ test('it automatically has a UUID generated upon model creation', function () {
         ->toBeTrue();
 });
 
+test('it soft deletes', function () {
+    $user = User::factory()->create();
+
+    $user->delete();
+
+    expect($user->trashed())->toBeTrue();
+});
+
 test('it has one token limit', function () {
     $user = User::factory()->create();
 
