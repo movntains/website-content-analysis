@@ -43,7 +43,7 @@ class ScanFactory extends Factory
 
     public function processing(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn (array $attributes): array => [
             'status' => ScanStatus::Processing,
             'processing_started_at' => now(),
             'processing_completed_at' => null,
@@ -53,7 +53,7 @@ class ScanFactory extends Factory
 
     public function completed(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn (array $attributes): array => [
             'status' => ScanStatus::Completed,
             'processing_started_at' => $attributes['processing_started_at'] ?? now()->subMinutes(5),
             'processing_completed_at' => now(),
@@ -63,7 +63,7 @@ class ScanFactory extends Factory
 
     public function failed(string $errorMessage): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn (array $attributes): array => [
             'status' => ScanStatus::Failed,
             'processing_started_at' => $attributes['processing_started_at'] ?? now()->subMinutes(5),
             'processing_completed_at' => now(),

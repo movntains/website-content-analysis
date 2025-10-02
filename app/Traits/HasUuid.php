@@ -12,7 +12,7 @@ trait HasUuid
 {
     public static function bootHasUuid(): void
     {
-        static::creating(function ($model) {
+        static::creating(function ($model): void {
             if (empty($model->uuid)) {
                 $model->uuid = Str::uuid()->toString();
             }
@@ -25,7 +25,7 @@ trait HasUuid
     }
 
     #[Scope]
-    public function byUuid(Builder $query, string $uuid): Builder
+    protected function byUuid(Builder $query, string $uuid): Builder
     {
         return $query->where('uuid', '=', $uuid);
     }
