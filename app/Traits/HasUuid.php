@@ -24,14 +24,14 @@ trait HasUuid
         return $this->getAttribute('uuid');
     }
 
+    public function getRouteKeyName(): string
+    {
+        return 'uuid';
+    }
+
     #[Scope]
     protected function byUuid(Builder $query, string $uuid): Builder
     {
         return $query->where('uuid', '=', $uuid);
-    }
-
-    public function getRouteKeyName(): string
-    {
-        return 'uuid';
     }
 }

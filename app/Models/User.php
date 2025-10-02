@@ -30,14 +30,6 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
-
     public function tokenLimit(): HasOne
     {
         return $this->hasOne(UserTokenLimit::class);
@@ -46,6 +38,14 @@ class User extends Authenticatable
     public function scans(): HasMany
     {
         return $this->hasMany(Scan::class);
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
     }
 
     protected function setEmailAttribute(string $value): void

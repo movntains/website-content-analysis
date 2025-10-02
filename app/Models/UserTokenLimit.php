@@ -23,6 +23,11 @@ class UserTokenLimit extends Model
         'last_reset_date',
     ];
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
     protected function casts(): array
     {
         return [
@@ -30,10 +35,5 @@ class UserTokenLimit extends Model
             'monthly_token_limit' => 'integer',
             'current_month_usage' => 'integer',
         ];
-    }
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
     }
 }

@@ -40,6 +40,16 @@ class Scan extends Model
         'error_message',
     ];
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function websiteDomain(): BelongsTo
+    {
+        return $this->belongsTo(WebsiteDomain::class);
+    }
+
     protected function casts(): array
     {
         return [
@@ -55,15 +65,5 @@ class Scan extends Model
             'processing_started_at' => 'datetime',
             'processing_completed_at' => 'datetime',
         ];
-    }
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function websiteDomain(): BelongsTo
-    {
-        return $this->belongsTo(WebsiteDomain::class);
     }
 }
