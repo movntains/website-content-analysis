@@ -21,7 +21,7 @@ class ScanFactory extends Factory
             'user_id' => User::factory(),
             'website_domain_id' => WebsiteDomain::factory(),
             'url' => $this->faker->url(),
-            'status' => ScanStatus::PENDING,
+            'status' => ScanStatus::Pending,
             'extracted_content' => $this->faker->randomHtml(),
             'clarity_score' => $this->faker->randomFloat(2, 0, 100),
             'consistency_score' => $this->faker->randomFloat(2, 0, 100),
@@ -44,7 +44,7 @@ class ScanFactory extends Factory
     public function processing(): static
     {
         return $this->state(fn (array $attributes) => [
-            'status' => ScanStatus::PROCESSING,
+            'status' => ScanStatus::Processing,
             'processing_started_at' => now(),
             'processing_completed_at' => null,
             'error_message' => null,
@@ -54,7 +54,7 @@ class ScanFactory extends Factory
     public function completed(): static
     {
         return $this->state(fn (array $attributes) => [
-            'status' => ScanStatus::COMPLETED,
+            'status' => ScanStatus::Completed,
             'processing_started_at' => $attributes['processing_started_at'] ?? now()->subMinutes(5),
             'processing_completed_at' => now(),
             'error_message' => null,
@@ -64,7 +64,7 @@ class ScanFactory extends Factory
     public function failed(string $errorMessage): static
     {
         return $this->state(fn (array $attributes) => [
-            'status' => ScanStatus::FAILED,
+            'status' => ScanStatus::Failed,
             'processing_started_at' => $attributes['processing_started_at'] ?? now()->subMinutes(5),
             'processing_completed_at' => now(),
             'error_message' => $errorMessage,

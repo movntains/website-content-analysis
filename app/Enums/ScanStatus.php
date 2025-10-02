@@ -6,8 +6,8 @@ namespace App\Enums;
 
 enum ScanStatus: string
 {
-    case PENDING = 'pending';
-    case PROCESSING = 'processing';
-    case COMPLETED = 'completed';
-    case FAILED = 'failed';
+    case Pending = 'pending';
+    case Processing = 'processing';
+    case Completed = 'completed';
+    case Failed = 'failed';
 }
