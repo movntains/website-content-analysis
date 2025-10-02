@@ -13,6 +13,8 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
+    container:
+      image: kirschbaumdevelopment/laravel-test-runner:8.4
 
     services:
       postgres:
