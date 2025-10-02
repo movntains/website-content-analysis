@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Scan::class);
     }
+
+    public function setEmailAttribute($value): void
+    {
+        $this->attributes['email'] = strtolower($value);
+    }
 }
