@@ -60,4 +60,4 @@ jobs:
         run: php artisan key:generate
 
       - name: Tests
-        run: ./vendor/bin/pest
+        run: ./vendor/bin/pest --configuration=phpunit.ci.xml --testdox --stop-on-failure
