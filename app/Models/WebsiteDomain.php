@@ -8,6 +8,7 @@ use App\Traits\HasUuid;
 use Database\Factories\WebsiteDomainFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class WebsiteDomain extends Model
@@ -18,4 +19,9 @@ class WebsiteDomain extends Model
     protected $fillable = [
         'domain_name',
     ];
+
+    public function scans(): HasMany
+    {
+        return $this->hasMany(Scan::class);
+    }
 }

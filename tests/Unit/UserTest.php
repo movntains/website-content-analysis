@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Models\Scan;
 use App\Models\User;
 use App\Models\UserTokenLimit;
 use Illuminate\Database\QueryException;
@@ -47,4 +48,14 @@ test('it cannot have more than one token limit', function () {
 
     expect(fn () => UserTokenLimit::factory()->for($user)->create())
         ->toThrow(QueryException::class);
+});
+
+test('it has many scans', function () {
+    $user = User::factory()->create();
+
+    Scan::factory(2)
+        ->for($user)
+        ->create();
+
+    expect($user->scans()->count())->toBe(2);
 });

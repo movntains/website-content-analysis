@@ -15,7 +15,7 @@ class WebsiteDomainFactory extends Factory
     public function definition(): array
     {
         return [
-            'domain_name' => fake()->unique()->domainName(),
+            'domain_name' => $this->faker->unique()->domainName(),
         ];
     }
 }

@@ -15,13 +15,13 @@ class UserTokenLimitFactory extends Factory
 {
     public function definition(): array
     {
-        $monthlyLimit = fake()->numberBetween(10000, 200000);
+        $monthlyLimit = $this->faker->numberBetween(10000, 200000);
 
         return [
             'user_id' => User::factory(),
             'monthly_token_limit' => $monthlyLimit,
-            'current_month_usage' => fake()->numberBetween(0, $monthlyLimit),
-            'last_reset_date' => fake()->dateTimeBetween('-1 year'),
+            'current_month_usage' => $this->faker->numberBetween(0, $monthlyLimit),
+            'last_reset_date' => $this->faker->dateTimeBetween('-1 year'),
         ];
     }
 }
