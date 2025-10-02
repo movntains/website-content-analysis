@@ -19,7 +19,7 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->integer('monthly_token_limit')->default(10000);
             $table->integer('current_month_usage')->default(0);
-            $table->dateTime('last_reset_date')->default(now()->toDateString());
+            $table->dateTime('last_reset_date')->default(now());
             $table->timestamps();
             $table->softDeletes();
 
