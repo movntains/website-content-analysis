@@ -24,10 +24,10 @@ return new class extends Migration
             $table->longText('extracted_content')->nullable();
 
             // Scores (0-100 scale)
-            $table->decimal('clarity_score', 5)->nullable();
-            $table->decimal('consistency_score', 5)->nullable();
-            $table->decimal('seo_score', 5)->nullable();
-            $table->decimal('tone_score', 5)->nullable();
+            $table->decimal('clarity_score', 5, 2)->nullable();
+            $table->decimal('consistency_score', 5, 2)->nullable();
+            $table->decimal('seo_score', 5, 2)->nullable();
+            $table->decimal('tone_score', 5, 2)->nullable();
 
             // Analysis texts
             $table->longText('clarity_analysis')->nullable();
