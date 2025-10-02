@@ -6,8 +6,6 @@ use App\Models\User;
 use Illuminate\Support\Facades\RateLimiter;
 use Laravel\Fortify\Features;
 
-uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
-
 test('login screen can be rendered', function () {
     $response = $this->get(route('login'));
 
@@ -44,7 +42,7 @@ test('users with two factor enabled are redirected to two factor challenge', fun
         'two_factor_confirmed_at' => now(),
     ])->save();
 
-    $response = $this->post(route('login'), [
+    $response = $this->post(route('login.store'), [
         'email' => $user->email,
         'password' => 'password',
     ]);

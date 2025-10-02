@@ -13,6 +13,19 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
+    container:
+      image: kirschbaumdevelopment/laravel-test-runner:8.4
+
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test
+        ports:
+          - 5432:5432
+        options: --health-cmd "pg_isready -U postgres" --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
       - name: Checkout
@@ -41,10 +54,13 @@ jobs:
         run: npm run build
 
       - name: Copy Environment File
-        run: cp .env.example .env
+        run: cp .env.ci.example .env
 
       - name: Generate Application Key
         run: php artisan key:generate
 
+      - name: Run Migrations
+        run: php artisan migrate --force
+
       - name: Tests
-        run: ./vendor/bin/pest
+        run: ./vendor/bin/pest --configuration=phpunit.ci.xml --testdox
