@@ -70,6 +70,11 @@
         "test": [
             "@php artisan config:clear --ansi",
             "@php artisan test"
+        ],
+        "lint": [
+            "rector",
+            "pint --parallel",
+            "npm run lint"
         ]
     },
     "extra": {
