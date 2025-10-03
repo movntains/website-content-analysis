@@ -78,14 +78,14 @@
             "npm run format",
             "npm run lint"
         ],
-        "test:types": "phpstan --memory-limit=512M",
-        "test:type-coverage": "pest --type-coverage --min=100 --memory-limit=512M",
-        "test:lint": [
+        "lint:check": [
             "pint --parallel --test",
             "rector --dry-run",
             "npm run format:check",
             "npm run lint:check"
-        ]
+        ],
+        "types:check": "phpstan --memory-limit=512M",
+        "type-coverage:check": "pest --type-coverage --min=100 --memory-limit=512M"
     },
     "extra": {
         "laravel": {
