@@ -29,17 +29,27 @@ jobs:
           composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
           npm install
 
-      - name: Run Pint
-        run: vendor/bin/pint
+      - name: Rector Cache
+        uses: actions/cache@v4
+        with:
+          path: /tmp/rector
+          key: ${{ runner.os }}-rector-${{ hashFiles('composer.lock') }}
+          restore-keys: ${{ runner.os }}-rector-
+      - run: mkdir -p /tmp/rector
 
-      - name: Format Frontend
-        run: npm run format
+      - name: PHPStan Cache
+        uses: actions/cache@v4
+        with:
+          path: /tmp/phpstan
+          key: ${{ runner.os }}-phpstan-${{ hashFiles('composer.lock') }}
+          restore-keys: ${{ runner.os }}-phpstan-
+      - run: mkdir -p /tmp/phpstan
 
-      - name: Lint Frontend
-        run: npm run lint
+      - name: Format and Lint Code
+        run: composer lint
 
-      # - name: Commit Changes
-      #   uses: stefanzweifel/git-auto-commit-action@v5
-      #   with:
-      #     commit_message: fix code style
-      #     commit_options: '--no-verify'
+      - name: Commit Changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+         commit_message: Applies automatic formatter and linter fixes
+         commit_options: '--no-verify'
