@@ -28,6 +28,9 @@ jobs:
         options: --health-cmd "pg_isready -U postgres" --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
+      - name: Mark Workspace as Safe
+        run: git config --global --add safe.directory /__w/website-content-analysis/website-content-analysis
+
       - name: Checkout
         uses: actions/checkout@v4
 
