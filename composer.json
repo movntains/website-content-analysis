@@ -86,7 +86,7 @@
         "test": [
             "@type-coverage:check",
             "@types:check",
-            "@lint",
+            "@lint:check",
             "@test:with-coverage"
         ],
         "test:ci": [
