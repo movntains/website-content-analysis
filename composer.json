@@ -68,10 +68,6 @@
             "Composer\\Config::disableProcessTimeout",
             "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"php artisan inertia:start-ssr\" --names=server,queue,logs,ssr --kill-others"
         ],
-        "test": [
-            "@php artisan config:clear --ansi",
-            "@php artisan test"
-        ],
         "lint": [
             "rector",
             "pint --parallel",
@@ -84,8 +80,20 @@
             "npm run format:check",
             "npm run lint:check"
         ],
-        "types:check": "phpstan --memory-limit=512M",
-        "type-coverage:check": "pest --type-coverage --min=100 --memory-limit=512M"
+        "types:check": "phpstan",
+        "type-coverage:check": "pest --type-coverage --min=100",
+        "test:with-coverage": "pest --parallel --coverage --min=90",
+        "test": [
+            "@type-coverage:check",
+            "@types:check",
+            "@lint",
+            "@test:with-coverage"
+        ],
+        "test:ci": [
+            "@type-coverage:check",
+            "@types:check",
+            "@test:with-coverage --configuration=phpunit.ci.xml --testdox"
+        ]
     },
     "extra": {
         "laravel": {
