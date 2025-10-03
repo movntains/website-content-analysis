@@ -37,14 +37,6 @@ jobs:
           restore-keys: ${{ runner.os }}-rector-
       - run: mkdir -p /tmp/rector
 
-      - name: PHPStan Cache
-        uses: actions/cache@v4
-        with:
-          path: /tmp/phpstan
-          key: ${{ runner.os }}-phpstan-${{ hashFiles('composer.lock') }}
-          restore-keys: ${{ runner.os }}-phpstan-
-      - run: mkdir -p /tmp/phpstan
-
       - name: Format and Lint Code
         run: composer lint
 

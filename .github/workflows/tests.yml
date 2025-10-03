@@ -62,5 +62,13 @@ jobs:
       - name: Run Migrations
         run: php artisan migrate --force
 
+      - name: PHPStan Cache
+        uses: actions/cache@v4
+        with:
+          path: /tmp/phpstan
+          key: ${{ runner.os }}-phpstan-${{ hashFiles('composer.lock') }}
+          restore-keys: ${{ runner.os }}-phpstan-
+      - run: mkdir -p /tmp/phpstan
+
       - name: Tests
         run: composer test:ci
