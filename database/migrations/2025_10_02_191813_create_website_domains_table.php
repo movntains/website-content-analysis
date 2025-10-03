@@ -10,7 +10,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('website_domains', function (Blueprint $table) {
+        Schema::create('website_domains', function (Blueprint $table): void {
             $table->id();
             $table->uuid()->unique();
             $table->string('domain_name')->unique();

@@ -10,7 +10,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('user_token_limits', function (Blueprint $table) {
+        Schema::create('user_token_limits', function (Blueprint $table): void {
             $table->id();
             $table->uuid()->unique();
             $table->foreignId('user_id')

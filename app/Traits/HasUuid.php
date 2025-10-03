@@ -12,7 +12,7 @@ trait HasUuid
 {
     public static function bootHasUuid(): void
     {
-        static::creating(function ($model) {
+        static::creating(function (self $model): void {
             if (empty($model->uuid)) {
                 $model->uuid = Str::uuid()->toString();
             }
@@ -21,17 +21,21 @@ trait HasUuid
 
     public function getUuid(): ?string
     {
-        return $this->getAttribute('uuid');
-    }
-
-    #[Scope]
-    public function byUuid(Builder $query, string $uuid): Builder
-    {
-        return $query->where('uuid', '=', $uuid);
+        return $this->uuid;
     }
 
     public function getRouteKeyName(): string
     {
         return 'uuid';
+    }
+
+    /**
+     * @param  Builder<static>  $query
+     * @return Builder<static>
+     */
+    #[Scope]
+    protected function byUuid(Builder $query, string $uuid): Builder
+    {
+        return $query->where('uuid', '=', $uuid);
     }
 }
