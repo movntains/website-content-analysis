@@ -78,6 +78,7 @@
             "npm run format",
             "npm run lint"
         ],
+        "test:types": "phpstan --memory-limit=512M",
         "test:type-coverage": "pest --type-coverage --min=100 --memory-limit=512M",
         "test:lint": [
             "pint --parallel --test",
