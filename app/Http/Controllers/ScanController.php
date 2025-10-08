@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Scan\StoreScanRequest;
 use App\Models\Scan;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -26,12 +27,12 @@ class ScanController extends Controller
         ]);
     }
 
-    public function create(): void
+    public function create(): Response
     {
-        //
+        return Inertia::render('scans/create');
     }
 
-    public function store(Request $request): void
+    public function store(StoreScanRequest $request): void
     {
         //
     }

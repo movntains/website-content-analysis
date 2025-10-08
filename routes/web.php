@@ -18,6 +18,7 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
     ], function (): void {
         Route::get('/', [ScanController::class, 'index'])->name('index');
         Route::get('/create', [ScanController::class, 'create'])->name('create');
+        Route::post('/', [ScanController::class, 'store'])->name('store');
     });
 });
 
