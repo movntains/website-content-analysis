@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\CreateScanAction;
 use App\Http\Requests\Scan\StoreScanRequest;
+use App\Http\Resources\ScanOverviewResource;
 use App\Jobs\ProcessScanJob;
 use App\Models\Scan;
 use App\Models\User;
@@ -15,8 +16,6 @@ use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 
-use function redirect;
-
 class ScanController extends Controller
 {
     public function index(): Response
@@ -24,11 +23,19 @@ class ScanController extends Controller
         /** @var User $user */
         $user = Auth::user();
 
-        // TODO: Implement pagination
-        $scans = $user->scans()->latest()->get();
+        /** @var int $perPage */
+        $perPage = config('scans.scans_per_page');
+
+        $scans = $user
+            ->scans()
+            ->latest()
+            ->paginate($perPage);
 
         return Inertia::render('scans/index', [
-            'scans' => $scans,
+            'scans' => ScanOverviewResource::collection($scans),
+            'breadcrumbs' => [
+                ['title' => 'Scans', 'href' => route('scans.index')],
+            ],
         ]);
     }
 

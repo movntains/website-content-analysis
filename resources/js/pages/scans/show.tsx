@@ -29,7 +29,6 @@ export default function ScansShow({ scan }: ScansShowProps) {
   const { stop } = usePoll(2000);
 
   useEffect(() => {
-    console.log(isProcessing);
     if (!isProcessing) {
       stop();
     }
