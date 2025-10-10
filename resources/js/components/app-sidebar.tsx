@@ -1,3 +1,6 @@
+import { Link } from '@inertiajs/react';
+import { BookOpen, Folder, LayoutGrid, Radar } from 'lucide-react';
+
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
@@ -10,12 +13,11 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
+import AppLogo from './app-logo';
+
 import { dashboard } from '@/routes';
 import { index } from '@/routes/scans';
 import { type NavItem } from '@/types';
-import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, Globe, LayoutGrid } from 'lucide-react';
-import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
   {
@@ -26,7 +28,7 @@ const mainNavItems: NavItem[] = [
   {
     title: 'Scans',
     href: index(),
-    icon: Globe,
+    icon: Radar,
   },
 ];
 
