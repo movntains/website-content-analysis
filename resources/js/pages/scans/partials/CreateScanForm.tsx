@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { store } from '@/actions/App/Http/Controllers/ScanController';
 
 export default function CreateScanForm() {
-  const { clearErrors, data, errors, reset, setData, submit } = useForm<{
+  const { clearErrors, data, errors, processing, reset, setData, submit } = useForm<{
     url: string;
   }>({
     url: '',
@@ -62,6 +62,7 @@ export default function CreateScanForm() {
         <Button
           type="submit"
           variant="default"
+          disabled={processing}
         >
           Start Scan
         </Button>

@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
+use function str_replace;
+
 /**
  * @property string $id
  * @property string $uuid
@@ -36,6 +38,16 @@ class WebsiteDomain extends Model
     protected $fillable = [
         'domain_name',
     ];
+
+    public static function findOrCreateByUrl(string $url): self
+    {
+        $domain = parse_url($url, PHP_URL_HOST);
+        $domain = str_replace('www.', '', (string) $domain);
+
+        return static::query()->firstOrCreate([
+            'domain_name' => $domain,
+        ]);
+    }
 
     /**
      * @return HasMany<Scan, $this>
