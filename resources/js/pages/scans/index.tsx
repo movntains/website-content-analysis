@@ -2,10 +2,11 @@ import { Head, Link } from '@inertiajs/react';
 import { Radar } from 'lucide-react';
 
 import { AppContent } from '@/components/app-content';
+import AppPagination from '@/components/AppPagination';
 import EmptyState from '@/components/empty-state';
 import Heading from '@/components/heading';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import AppLayout from '@/layouts/app-layout';
 import ScansList from '@/pages/scans/partials/ScansList';
 import ScansTable from '@/pages/scans/partials/ScansTable';
@@ -70,6 +71,16 @@ export default function ScansIndex({ breadcrumbs, scans }: ScansIndexProps) {
 
                 <ScansList scans={scans.data} />
               </CardContent>
+
+              {scans.meta.last_page > 1 && (
+                <CardFooter>
+                  <AppPagination
+                    links={scans.meta.links}
+                    previousPageUrl={scans.links.prev}
+                    nextPageUrl={scans.links.next}
+                  />
+                </CardFooter>
+              )}
             </Card>
           )}
         </div>
