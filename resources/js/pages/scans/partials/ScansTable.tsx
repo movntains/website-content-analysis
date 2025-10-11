@@ -38,7 +38,10 @@ export default function ScansTable({ scans }: ScansTableProps) {
               />
             </TableCell>
             <TableCell className="text-right">
-              <TextLink href={show(scan.uuid)}>
+              <TextLink
+                href={show(scan.uuid)}
+                prefetch
+              >
                 <span>View Details</span>
                 <span className="sr-only"> About Scan for {scan.url}</span>
               </TextLink>

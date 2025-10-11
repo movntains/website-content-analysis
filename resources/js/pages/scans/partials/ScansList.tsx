@@ -29,6 +29,7 @@ export default function ScansList({ scans }: ScansListProps) {
               <TextLink
                 href={show(scan.uuid)}
                 className="flex flex-col gap-2"
+                prefetch
               >
                 <span>View Details</span>
                 <span className="sr-only"> About Scan for {scan.url}</span>
