@@ -9,7 +9,11 @@ import type { BreadcrumbItem } from '@/types';
 import { useEffect, useMemo } from 'react';
 
 interface ScansShowProps {
-  scan: any;
+  // TODO: Update this to a proper type
+  scan: {
+    id: string;
+    status: string;
+  };
 }
 
 export default function ScansShow({ scan }: ScansShowProps) {
