@@ -20,7 +20,7 @@ class ScanOverviewResource extends JsonResource
     {
         return [
             'uuid' => $this->getUuid(),
-            'domainName' => $this->whenLoaded('websiteDomain', fn () => $this->websiteDomain?->domain_name ?? ''),
+            'domainName' => $this->whenLoaded('websiteDomain', fn () => $this->websiteDomain->domain_name),
             'url' => $this->url,
             'status' => $this->status,
             'createdAt' => $this->created_at,
