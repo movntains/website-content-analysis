@@ -27,8 +27,8 @@ export default function AppPagination({ links, previousPageUrl, nextPageUrl }: A
 
         {links
           .filter((link) => !['&laquo; Previous', 'Next &raquo;'].includes(link.label))
-          .map((link, index) => (
-            <PaginationItem key={`pagination-link-${index}`}>
+          .map((link) => (
+            <PaginationItem key={link.url ?? link.label}>
               {link.url === null && <span>{link.label}</span>}
 
               {link.url !== null && (
