@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Actions;
 
 use App\Models\Scan;
+use Arr;
 use Exception;
 
 class ProcessScanAction
@@ -20,18 +21,18 @@ class ProcessScanAction
 
         try {
             $scan->update([
-                'extracted_content' => $analysisData['extracted_content'] ?? null,
-                'clarity_score' => $analysisData['clarity_score'] ?? null,
-                'consistency_score' => $analysisData['consistency_score'] ?? null,
-                'seo_score' => $analysisData['seo_score'] ?? null,
-                'tone_score' => $analysisData['tone_score'] ?? null,
-                'clarity_analysis' => $analysisData['clarity_analysis'] ?? null,
-                'consistency_analysis' => $analysisData['consistency_analysis'] ?? null,
-                'seo_analysis' => $analysisData['seo_analysis'] ?? null,
-                'tone_analysis' => $analysisData['tone_analysis'] ?? null,
-                'suggested_headlines' => $analysisData['suggested_headlines'] ?? null,
-                'suggested_ctas' => $analysisData['suggested_ctas'] ?? null,
-                'suggested_content_hierarchy' => $analysisData['suggested_content_hierarchy'] ?? null,
+                'extracted_content' => Arr::get($analysisData, 'extracted_content'),
+                'clarity_score' => Arr::get($analysisData, 'clarity_score'),
+                'consistency_score' => Arr::get($analysisData, 'consistency_score'),
+                'seo_score' => Arr::get($analysisData, 'seo_score'),
+                'tone_score' => Arr::get($analysisData, 'tone_score'),
+                'clarity_analysis' => Arr::get($analysisData, 'clarity_analysis'),
+                'consistency_analysis' => Arr::get($analysisData, 'consistency_analysis'),
+                'seo_analysis' => Arr::get($analysisData, 'seo_analysis'),
+                'tone_analysis' => Arr::get($analysisData, 'tone_analysis'),
+                'suggested_headlines' => Arr::get($analysisData, 'suggested_headlines'),
+                'suggested_ctas' => Arr::get($analysisData, 'suggested_ctas'),
+                'suggested_content_hierarchy' => Arr::get($analysisData, 'suggested_content_hierarchy'),
                 'tokens_used' => $tokensUsed,
             ]);
 
