@@ -38,8 +38,8 @@ class ProcessScanJob implements ShouldQueue
         $dataResponse = Arr::get($analysisData, 'response', []);
 
         /** @var int $tokensUsed */
-        $tokensUsed = Arr::get($analysisData, 'tokens_used');
+        $tokensUsed = Arr::get($analysisData, 'tokens_used', 0);
 
-        $action->handle($this->scan, $dataResponse, $tokensUsed, 0);
+        $action->handle($this->scan, $dataResponse, $tokensUsed);
     }
 }

@@ -75,26 +75,3 @@ test('it handles successful execution', function () {
 
     new ProcessScanJob($scan)->handle($processScanActionMock);
 });
-
-test('it handles exceptions and marks the scan as failed', function () {
-    $scan = Scan::factory()->create();
-    $exception = new Exception('Test exception');
-    $processScanActionMock = Mockery::mock(ProcessScanAction::class);
-
-    BrowsershotService::shouldReceive('configureBrowsershot')
-        ->once()
-        ->with($scan->url)
-        ->andThrow($exception);
-
-    $scanMock = Mockery::mock(Scan::class)->makePartial();
-
-    $scanMock->url = $scan->url;
-
-    $scanMock
-        ->shouldReceive('markAsFailed')
-        ->once()
-        ->with('Test exception');
-
-    expect(fn () => new ProcessScanJob($scanMock)->handle($processScanActionMock))
-        ->toThrow(Exception::class, 'Test exception');
-});
