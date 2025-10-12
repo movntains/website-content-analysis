@@ -27,25 +27,19 @@ class ProcessScanJob implements ShouldQueue
      */
     public function handle(ProcessScanAction $action): void
     {
-        try {
-            $html = BrowsershotService::configureBrowsershot($this->scan->url)
-                ->bodyHtml();
+        $html = BrowsershotService::configureBrowsershot($this->scan->url)
+            ->bodyHtml();
 
-            $extractedContent = BrowsershotService::extractVisibleContent($html);
+        $extractedContent = BrowsershotService::extractVisibleContent($html);
 
-            $analysisData = ScanAnalysisService::analyze($extractedContent);
+        $analysisData = ScanAnalysisService::analyze($extractedContent);
 
-            /** @var array<mixed> $dataResponse */
-            $dataResponse = Arr::get($analysisData, 'response');
+        /** @var array<mixed> $dataResponse */
+        $dataResponse = Arr::get($analysisData, 'response', []);
 
-            /** @var int $tokensUsed */
-            $tokensUsed = Arr::get($analysisData, 'tokens_used');
+        /** @var int $tokensUsed */
+        $tokensUsed = Arr::get($analysisData, 'tokens_used');
 
-            $action->handle($this->scan, $dataResponse, $tokensUsed);
-        } catch (Exception $e) {
-            $this->scan->markAsFailed($e->getMessage());
-
-            throw $e;
-        }
+        $action->handle($this->scan, $dataResponse, $tokensUsed, 0);
     }
 }
