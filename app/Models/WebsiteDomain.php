@@ -13,6 +13,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
+use InvalidArgumentException;
+use Throwable;
 
 /**
  * @property string $id
@@ -36,6 +38,22 @@ class WebsiteDomain extends Model
     protected $fillable = [
         'domain_name',
     ];
+
+    /**
+     * @throws Throwable
+     */
+    public static function findOrCreateByUrl(string $url): self
+    {
+        $host = parse_url($url, PHP_URL_HOST);
+
+        throw_if($host === false || $host === null, new InvalidArgumentException("Invalid URL provided: {$url}"));
+
+        $domain = preg_replace('/^www\./i', '', $host);
+
+        return static::query()->firstOrCreate([
+            'domain_name' => $domain,
+        ]);
+    }
 
     /**
      * @return HasMany<Scan, $this>

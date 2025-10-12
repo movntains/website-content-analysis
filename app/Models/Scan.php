@@ -92,6 +92,31 @@ class Scan extends Model
         return $this->belongsTo(WebsiteDomain::class);
     }
 
+    public function markAsProcessing(): void
+    {
+        $this->update([
+            'status' => ScanStatus::Processing,
+            'processing_started_at' => now(),
+        ]);
+    }
+
+    public function markAsCompleted(): void
+    {
+        $this->update([
+            'status' => ScanStatus::Completed,
+            'processing_completed_at' => now(),
+        ]);
+    }
+
+    public function markAsFailed(?string $errorMessage = null): void
+    {
+        $this->update([
+            'status' => ScanStatus::Failed,
+            'processing_completed_at' => now(),
+            'error_message' => $errorMessage,
+        ]);
+    }
+
     /**
      * @return array<string, string>
      */
