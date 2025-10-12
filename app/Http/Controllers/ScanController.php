@@ -28,6 +28,7 @@ class ScanController extends Controller
 
         $scans = $user
             ->scans()
+            ->with(['websiteDomain'])
             ->latest()
             ->paginate($perPage);
 
