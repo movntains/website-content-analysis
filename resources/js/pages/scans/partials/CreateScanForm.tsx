@@ -18,10 +18,12 @@ export default function CreateScanForm() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    submit(store());
-
-    clearErrors();
-    reset();
+    submit(store(), {
+      onSuccess: () => {
+        clearErrors();
+        reset();
+      },
+    });
   };
 
   return (
