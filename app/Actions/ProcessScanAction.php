@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Actions;
 
 use App\Models\Scan;
-use Arr;
 use Exception;
+use Illuminate\Support\Arr;
 
 class ProcessScanAction
 {
