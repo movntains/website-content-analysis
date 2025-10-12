@@ -10,6 +10,9 @@ use Prism\Prism\Prism;
 
 class ScanAnalysisService
 {
+    /**
+     * @return array<string, mixed>
+     */
     public function analyze(string $extractedContent): array
     {
         $schema = ScanResultSchema::create();
