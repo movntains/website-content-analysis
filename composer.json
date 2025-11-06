@@ -95,7 +95,7 @@
         "test:ci": [
             "@type-coverage:check",
             "@types:check",
-            "@test:with-coverage --configuration=phpunit.ci.xml --testdox"
+            "@test:with-coverage --configuration=phpunit.ci.xml --testdox --coverage-clover=coverage.xml"
         ]
     },
     "extra": {
