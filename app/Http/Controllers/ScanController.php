@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\CreateScanAction;
 use App\Http\Requests\Scan\StoreScanRequest;
+use App\Http\Resources\ScanDetailsResource;
 use App\Http\Resources\ScanOverviewResource;
 use App\Jobs\ProcessScanJob;
 use App\Models\Scan;
@@ -60,7 +61,7 @@ class ScanController extends Controller
     public function show(Scan $scan): Response
     {
         return Inertia::render('scans/show', [
-            'scan' => $scan,
+            'scan' => ScanDetailsResource::make($scan),
         ]);
     }
 
