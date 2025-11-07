@@ -85,3 +85,8 @@ jobs:
           name: browser-screenshots
           path: |
             tests/Browser/Screenshots
+
+      - name: Upload Test Coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
