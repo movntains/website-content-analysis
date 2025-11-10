@@ -11,27 +11,17 @@ import ScanStatus from '@/pages/scans/partials/ScanStatus';
 import ScanSuggestions from './partials/ScanSuggestions';
 
 import { formatDate } from '@/lib/utils';
-import { index, show } from '@/routes/scans';
+import { index } from '@/routes/scans';
 import type { BreadcrumbItem } from '@/types';
 import { ScanStatusEnum } from '@/types/enums/scan';
 import type { ScanDetails } from '@/types/scan';
 
 interface ScansShowProps {
   scan: ScanDetails;
+  breadcrumbs: BreadcrumbItem[];
 }
 
-export default function ScansShow({ scan }: ScansShowProps) {
-  const breadcrumbs: BreadcrumbItem[] = [
-    {
-      title: 'Scans',
-      href: index().url,
-    },
-    {
-      title: 'Scan Results',
-      href: show(scan).url,
-    },
-  ];
-
+export default function ScansShow({ breadcrumbs, scan }: ScansShowProps) {
   const isProcessing = useMemo(() => [ScanStatusEnum.PENDING, ScanStatusEnum.PROCESSING].includes(scan.status), [scan]);
 
   const { stop } = usePoll(2000);
