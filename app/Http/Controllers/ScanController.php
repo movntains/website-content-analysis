@@ -60,8 +60,14 @@ class ScanController extends Controller
 
     public function show(Scan $scan): Response
     {
+        $this->authorize('view', $scan);
+
         return Inertia::render('scans/show', [
             'scan' => ScanDetailsResource::make($scan),
+            'breadcrumbs' => [
+                ['title' => 'Scans', 'href' => route('scans.index')],
+                ['title' => 'Scan Results', 'href' => route('scans.show', ['scan' => $scan])],
+            ],
         ]);
     }
 
