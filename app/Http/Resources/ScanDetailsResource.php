@@ -13,7 +13,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  */
 class ScanDetailsResource extends JsonResource
 {
-    public static $wrap = null;
+    public static $wrap;
 
     /**
      * @return array<string, mixed>
