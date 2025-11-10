@@ -27,4 +27,9 @@ export interface ScanDetails {
     seo: string;
     tone: string;
   };
+  suggestions: {
+    headlines: string[];
+    ctas: string[];
+    hierarchy: string[];
+  };
 }

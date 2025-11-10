@@ -37,6 +37,11 @@ class ScanDetailsResource extends JsonResource
                 'seo' => $this->seo_analysis,
                 'tone' => $this->tone_analysis,
             ],
+            'suggestions' => [
+                'headlines' => $this->suggested_headlines ?? [],
+                'ctas' => $this->suggested_ctas ?? [],
+                'hierarchy' => $this->suggested_content_hierarchy ?? [],
+            ],
         ];
     }
 }

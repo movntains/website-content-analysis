@@ -8,6 +8,7 @@ import AppLayout from '@/layouts/app-layout';
 import ScanAnalysis from '@/pages/scans/partials/ScanAnalysis';
 import ScanScores from '@/pages/scans/partials/ScanScores';
 import ScanStatus from '@/pages/scans/partials/ScanStatus';
+import ScanSuggestions from './partials/ScanSuggestions';
 
 import { formatDate } from '@/lib/utils';
 import { index, show } from '@/routes/scans';
@@ -74,6 +75,7 @@ export default function ScansShow({ scan }: ScansShowProps) {
             <div className="space-y-10">
               <ScanScores scores={scan.scores} />
               <ScanAnalysis analysis={scan.analysis} />
+              <ScanSuggestions suggestions={scan.suggestions} />
             </div>
           )}
         </div>
