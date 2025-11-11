@@ -51,7 +51,7 @@ export default function ScansShow({ breadcrumbs, scan }: ScansShowProps) {
           <div className="mb-6 space-y-2">
             <Heading
               title={scan.url}
-              description={`Scanned on ${formatDate(scan.createdAt).toLocaleString()}`}
+              description={`Scanned on ${formatDate(scan.createdAt)}`}
             />
 
             <ScanStatus status={scan.status} />
