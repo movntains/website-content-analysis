@@ -13,9 +13,4 @@ class ScanPolicy
     {
         return $scan->user_id === $user->getKey();
     }
-
-    public function delete(User $user, Scan $scan): bool
-    {
-        return false;
-    }
 }
