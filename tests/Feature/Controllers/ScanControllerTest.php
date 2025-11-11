@@ -97,3 +97,75 @@ test('it returns validation errors if the request data is invalid when storing a
         ])
         ->assertSessionHasErrors(['url']);
 });
+
+test('it renders the scans show page', function () {
+    $user = User::factory()->create();
+    $scan = Scan::factory()
+        ->for($user)
+        ->create();
+
+    actingAs($user)
+        ->get(route('scans.show', [
+            'scan' => $scan,
+        ]))
+        ->assertInertia(fn (AssertableInertia $page) => $page
+            ->component('scans/show')
+            ->has(
+                'scan',
+                fn (AssertableInertia $page) => $page
+                    ->whereAll([
+                        'uuid' => $scan->getUuid(),
+                        'url' => $scan->url,
+                        'status' => $scan->status,
+                        'createdAt' => $scan->created_at->toJSON(),
+                        'scores' => [
+                            'clarity' => $scan->clarity_score,
+                            'consistency' => $scan->consistency_score,
+                            'seo' => $scan->seo_score,
+                            'tone' => $scan->tone_score,
+                        ],
+                        'analysis' => [
+                            'clarity' => $scan->clarity_analysis,
+                            'consistency' => $scan->consistency_analysis,
+                            'seo' => $scan->seo_analysis,
+                            'tone' => $scan->tone_analysis,
+                        ],
+                        'suggestions' => [
+                            'headlines' => $scan->suggested_headlines,
+                            'ctas' => $scan->suggested_ctas,
+                            'hierarchy' => $scan->suggested_content_hierarchy,
+                        ],
+                    ])
+            )
+            ->has('breadcrumbs', 2)
+            ->has(
+                'breadcrumbs.0',
+                fn (AssertableInertia $page) => $page
+                    ->whereAll([
+                        'title' => 'Scans',
+                        'href' => route('scans.index'),
+                    ])
+            )
+            ->has(
+                'breadcrumbs.1',
+                fn (AssertableInertia $page) => $page
+                    ->whereAll([
+                        'title' => 'Scan Results',
+                        'href' => route('scans.show', ['scan' => $scan]),
+                    ])
+            )
+        );
+});
+
+test("a user cannot view another user's scan results", function () {
+    $user = User::factory()->create();
+    $scan = Scan::factory()
+        ->for($user)
+        ->create();
+
+    actingAs(User::factory()->create())
+        ->get(route('scans.show', [
+            'scan' => $scan,
+        ]))
+        ->assertForbidden();
+});
