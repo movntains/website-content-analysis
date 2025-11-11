@@ -26,11 +26,11 @@ export default function ScanScores({ scores }: ScanScoresProps) {
         />
         <ScanScoreCard
           scoreName="SEO"
-          scoreValue={scores.clarity}
+          scoreValue={scores.seo}
         />
         <ScanScoreCard
           scoreName="Tone"
-          scoreValue={scores.clarity}
+          scoreValue={scores.tone}
         />
       </div>
     </div>
